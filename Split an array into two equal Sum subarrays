@@ -1,0 +1,28 @@
+//Split an array into two equal Sum subarrays
+
+class Solution {
+    public boolean canSplit(int arr[]) {
+        int n=arr.length;
+        int [] pref=new int[n];
+        int [] suff=new int[n];
+        pref[0]=arr[0];
+        for(int i=1;i<n;i++)
+        {
+            pref[i]=arr[i]+pref[i-1];
+        }
+        suff[n-1]=arr[n-1];
+        for(int i=n-2;i>=0;i--)
+        {
+            suff[i]=arr[i]+suff[i+1];
+        }
+        for(int i=0;i<n-1;i++)
+        {
+            if(pref[i]==suff[i+1])
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+//Time Complexity:O(n)
+//Space Complexity:O(n)
